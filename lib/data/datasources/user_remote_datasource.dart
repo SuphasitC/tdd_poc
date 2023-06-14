@@ -1,8 +1,10 @@
+import 'package:tdd_poc/data/models/greeting_model.dart';
 import 'package:tdd_poc/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 abstract class UserRemoteDataSource {
   Future<UserModel> getUser(String id, String password);
+  Future<GreetingModel> getGreeting();
 }
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
@@ -33,6 +35,28 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     // or something about http handling
     if (response['data'] != null) {
       return UserModel.fromJson(response['data'] as Map<String, dynamic>);
+    } else {
+      throw Exception('Failed to load service');
+    }
+  }
+  
+  @override
+  Future<GreetingModel> getGreeting() async {
+    // call api (GET)
+    // final response = await http.get(url);
+
+    // mock response
+    await Future.delayed(const Duration(seconds: 2));
+    final response = {
+      "code": 1000,
+      "data": {
+        "greeting_string": "Hello, from remote datasource."
+      }
+    };
+
+    // or something about http handling
+    if (response['data'] != null) {
+      return GreetingModel.fromJson(response['data'] as Map<String, dynamic>);
     } else {
       throw Exception('Failed to load service');
     }

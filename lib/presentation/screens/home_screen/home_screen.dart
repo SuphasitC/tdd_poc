@@ -18,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _ctrl.getGreeting();
       await _ctrl.getUserByIdAndPassword('xxx', 'password');
     });
   }
@@ -32,11 +33,17 @@ class _HomeScreenState extends State<HomeScreen> {
             body: Center(
               child: ctrl.isLoading
                   ? const CircularProgressIndicator()
-                  : Row(
+                  : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("${ctrl.user?.firstName ?? "Nothing"} "),
-                        Text("${ctrl.user?.lastName ?? "NothingLastname"} "),
+                        Text(ctrl.greeting?.greetingString ?? ""),
+                        const SizedBox(height: 20),
+                        Text(
+                          "Firstname: ${ctrl.user?.firstName ?? "Nothing"} ",
+                        ),
+                        Text(
+                          "Lastname: ${ctrl.user?.lastName ?? "NothingLastname"} ",
+                        ),
                         Text("age: ${ctrl.user?.age}"),
                       ],
                     ),
