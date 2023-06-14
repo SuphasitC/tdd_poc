@@ -1,3 +1,4 @@
+import 'package:tdd_poc/core/remote_datasource.dart';
 import 'package:tdd_poc/data/models/greeting_model.dart';
 import 'package:tdd_poc/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
@@ -7,7 +8,7 @@ abstract class UserRemoteDataSource {
   Future<GreetingModel> getGreeting();
 }
 
-class UserRemoteDataSourceImpl implements UserRemoteDataSource {
+class UserRemoteDataSourceImpl extends RemoteDataSource implements UserRemoteDataSource {
   UserRemoteDataSourceImpl();
 
   @override
@@ -42,9 +43,12 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   
   @override
   Future<GreetingModel> getGreeting() async {
-    // call api (GET)
-    // final response = await http.get(url);
+    print(apiService.getGreetingEndpoint);
 
+    // call api (GET)
+    // final mockCalled = await http.get(Uri(path: apiService.getGreetingEndpoint));
+    // final mockCalled = await http.get(Uri(path: "https://lotto_glo.com/greeting"));
+    
     // mock response
     await Future.delayed(const Duration(seconds: 2));
     final response = {

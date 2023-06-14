@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:tdd_poc/api_service.dart';
 import 'package:tdd_poc/data/datasources/user_remote_datasource.dart';
 import 'package:tdd_poc/data/repositories/user_repository_impl.dart';
 import 'package:tdd_poc/domain/repositories/user_repository.dart';
@@ -32,5 +33,8 @@ class DependencyInjection {
     sl.registerFactory<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(),
     );
+
+    // etc, (ApiService, local storage)
+    sl.registerFactory<ApiService>(() => ApiService());
   }
 }
