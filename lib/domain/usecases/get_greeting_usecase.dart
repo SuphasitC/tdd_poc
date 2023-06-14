@@ -8,7 +8,7 @@ class GetGreetingUseCase implements UseCase<GreetingEntity, NoRequestParams> {
   GetGreetingUseCase(this.repository);
 
   @override
-  Future<GreetingEntity> call(NoRequestParams params) async {
+  Future<GreetingEntity> call(NoRequestParams _) async {
     return repository.getGreeting();
   }
 }
